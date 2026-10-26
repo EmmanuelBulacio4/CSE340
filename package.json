@@ -1,0 +1,28 @@
+{
+  "name": "cse340",
+  "version": "1.0.0",
+  "description": "CSE 340 block 6 2026",
+  "homepage": "https://github.com/EmmanuelBulacio4/CSE340#readme",
+  "bugs": {
+    "url": "https://github.com/EmmanuelBulacio4/CSE340/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EmmanuelBulacio4/CSE340.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "dev": "nodemon",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "ejs": "^7.0.2",
+    "express": "^5.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}
