@@ -3,6 +3,7 @@ import { fileURLToPath } from 'url';
 import path from "path";
 import { testConnection } from "./src/models/db.js";
 import { getAllOrganizations } from "./src/models/organizations.js";
+import { getAllProjects } from "./src/models/projects.js";
 
 const NODE_ENV = process.env.NODE_ENV;
 const PORT = process.env.PORT || 3000;
@@ -31,10 +32,12 @@ app.get('/organizations', async(req, res) => {
   res.render('organizations', { title, organizations });
 });
 
-app.get('/projects', async(req, res) => {
+app.get('/projects', async (req, res) => {
+  const projects = await getAllProjects();
+
   const title = 'Service Projects';
-  res.render('projects', { title });
-});
+  res.render('projects', { title, projects });
+}); //Ya fue modificado para la TA w2
 
 app.get('/categories', async (req, res) => {
   const title = 'Categories';
