@@ -20,6 +20,10 @@ CREATE TABLE projects (
 	p_date DATE NOT NULL
 );
 
+CREATE TABLE categories (
+	category_id SERIAL PRIMARY KEY,
+	name VARCHAR(100) NOT NULL UNIQUE
+);
 
 -- ====================
 --  INSERT DATA
@@ -139,3 +143,13 @@ INSERT INTO projects (organization_id, p_title, p_description, p_location, p_dat
 		'Downtown Mission Hub',
 		'2026-11-14'
 	);
+
+INSERT INTO categories (name) 
+VALUES 
+    ('Renewable Energy'),
+	('Infrastructure & Construction'),
+	('Urban Agriculture & Food'),
+	('Environmental Conservation'),
+	('Education & Workshops'),
+	('Community Relief & Support'),
+	('Accessibility & Inclusion');
