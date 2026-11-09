@@ -9,8 +9,6 @@ CREATE table organizations (
 	logo_filename varchar(255) NOT NULL
 );
 
--- Team Activity w2
-
 CREATE TABLE projects (
 	project_id SERIAL PRIMARY KEY,
 	organization_id INT NOT NULL REFERENCES organizations(organization_id) ON DELETE CASCADE,
@@ -23,6 +21,14 @@ CREATE TABLE projects (
 CREATE TABLE categories (
 	category_id SERIAL PRIMARY KEY,
 	name VARCHAR(100) NOT NULL UNIQUE
+);
+
+CREATE TABLE project_categories (
+	project_id INT NOT NULL,
+	category_id INT NOT NULL,
+	PRIMARY KEY (project_id, category_id),
+	CONSTRAINT fk_project FOREIGN KEY (project_id) REFERENCES projects(project_id) ON DELETE CASCADE,
+	CONSTRAINT fk_category FOREIGN KEY (category_id) REFERENCES categories(category_id) ON DELETE CASCADE
 );
 
 -- ====================
@@ -153,3 +159,34 @@ VALUES
 	('Education & Workshops'),
 	('Community Relief & Support'),
 	('Accessibility & Inclusion');
+
+INSERT INTO project_categories (project_id, category_id) VALUES 
+	(1, 1),
+	(1, 2),
+	(2, 2),
+	(2, 7),
+	(3, 2),
+	(3, 6),
+	(4, 2),
+	(4, 4),
+	(5, 1),
+	(5, 5),
+	(5, 6),
+	(6, 3),
+	(6, 4),
+	(7, 3),
+	(7, 4),
+	(8, 3),
+	(8, 5),
+	(9, 3),
+	(9, 4),
+	(10, 3),
+	(10, 5),
+	(11, 6),
+	(11, 3),
+	(12, 5),
+	(12, 7),
+	(13, 4),
+	(14, 6),
+	(14, 5),
+	(15, 6);
