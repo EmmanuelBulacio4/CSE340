@@ -13,23 +13,6 @@
                         <a href="/organization/<%= organization.organization_id %>">
                         <%= organization.name %>
                     </a>: <%= organization.contact_email %>
-                    <h2>Service Projects</h2>
-                    <ul>
-                        <% if (organization.projects.length > 0) { %>
-                            <% organization.projects.forEach(project => { %>
-                                <li>
-                                    <a href="/project/<%= project.project_id %>">
-                                        <strong><%= new Date(project.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' }) %>:</strong>
-                                        <%= project.title %>
-                                    </a>
-                                    <p><strong>Description:</strong> <%= project.description %></p>
-                                    <p><strong>Location:</strong> <%= project.location %></p>
-                                </li>
-                            <% }); %>
-                        <% } else { %>
-                            <li>No service projects listed.</li>
-                        <% } %>
-                    </ul>
                 </li>
                 <% }); %>
         </ul>
