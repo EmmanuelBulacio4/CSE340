@@ -1,3 +1,4 @@
+import { getCategoriesByProjectId } from "../models/categories.js";
 import {
   getUpcomingProjects,
   getProjectDetails,
@@ -24,8 +25,9 @@ const showProjectDetailsPage = async (req, res) => {
     throw error;
   }
 
+  const categories = await getCategoriesByProjectId(projectId);
   const title = "Project Details";
-  res.render("project", { title, project });
+  res.render("project", { title, project, categories });
 };
 
 export {

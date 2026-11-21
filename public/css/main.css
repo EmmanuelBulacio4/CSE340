@@ -246,6 +246,28 @@ main h2 {
     text-align: center;
 }
 
+.category-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.category-tag {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 999px;
+    background-color: #dbeafe;
+    color: var(--color-accent);
+    font-size: 0.9rem;
+    text-decoration: none;
+}
+
+.category-tag:hover,
+.category-tag:focus {
+    background-color: #bfdbfe;
+    text-decoration: underline;
+}
+
 /* Contenedor del formulario */
 form {
     background-color: var(--color-surface);
