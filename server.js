@@ -13,6 +13,8 @@ const __dirname = path.dirname(__filename);
 const app = express();
 
 //Middlewares
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 app.set('view engine', 'ejs'); //Templating engine
 app.set('views', path.join(__dirname, 'src/views')); //tells view engine where the pages are located.
