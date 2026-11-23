@@ -5,17 +5,25 @@ import {
   showOrganizationsPage,
   showOrganizationDetailsPage,
   showNewOrganizationForm,
-  processNewOrganizationForm
+  processNewOrganizationForm,
+  organizationValidation,
+  showEditOrganizationForm,
+  processEditOrganizationForm,
 } from "./controllers/organizations.js";
 import {
-    showProjectsPage,
-    showProjectDetailsPage
-} from './controllers/projects.js';
+  showProjectsPage,
+  showProjectDetailsPage,
+  showNewProjectForm,
+  processNewProjectForm,
+  projectValidation,
+} from "./controllers/projects.js";
 
 import {
-    showCategoriesPage,
-    showCategoryPage
-} from './controllers/categories.js';
+  showCategoriesPage,
+  showCategoryPage,
+  showAssignCategoriesForm,
+  processAssignCategoriesForm,
+} from "./controllers/categories.js";
 
 import { testErrorPage } from './controllers/errors.js';
 
@@ -30,6 +38,12 @@ router.get('/organization/:id', showOrganizationDetailsPage);
 router.get("/project/:id", showProjectDetailsPage);
 router.get("/category/:id", showCategoryPage);
 router.get("/new-organization", showNewOrganizationForm);
-router.post("/new-organization", processNewOrganizationForm);
+router.post("/new-organization", organizationValidation, processNewOrganizationForm);
+router.get("/edit-organization/:id", showEditOrganizationForm);
+router.post("/edit-organization/:id", organizationValidation, processEditOrganizationForm);
+router.get("/new-project", showNewProjectForm);
+router.post("/new-project", projectValidation, processNewProjectForm);
+router.get("/assign-categories/:projectId", showAssignCategoriesForm);
+router.post("/assign-categories/:projectId", processAssignCategoriesForm);;
 
 export default router;
