@@ -3,6 +3,7 @@ import {
   getUpcomingProjects,
   getProjectDetails,
   createNewProject,
+  updateProject,
 } from "../models/projects.js";
 import { getAllOrganizations } from "../models/organizations.js"
 import { body, validationResult } from 'express-validator';
@@ -12,8 +13,8 @@ const projectValidation = [
     .trim()
     .notEmpty()
     .withMessage("Title is required!")
-    .isLength({ min: 3, max: 200 })
-    .withMessage("Title must be between 3 and 200 characters!"),
+    .isLength({ min: 3, max: 100 })
+    .withMessage("Title must be between 3 and 100 characters!"),
   body("description")
     .trim()
     .notEmpty()
@@ -24,8 +25,8 @@ const projectValidation = [
     .trim()
     .notEmpty()
     .withMessage("Location is required!")
-    .isLength({ max: 200 })
-    .withMessage("Location must be less than 200 characters!"),
+    .isLength({ max: 155 })
+    .withMessage("Location must be less than 155 characters!"),
   body("date")
     .notEmpty()
     .withMessage("Date is required!")
@@ -86,7 +87,7 @@ const processNewProjectForm = async(req, res) => {
       return res.redirect("/new-project");
     }
     // Create the new project in the database
-    const newProjectId = await createProject(
+    const newProjectId = await createNewProject(
       title,
       description,
       location,
@@ -103,10 +104,57 @@ const processNewProjectForm = async(req, res) => {
   }
 };
 
+const showEditProjectForm = async (req, res) => {
+  const projectId = req.params.id;
+  const projectDetails = await getProjectDetails(projectId);
+
+  if (!projectDetails) {
+    const error = new Error("Project not found");
+    error.status = 404;
+    throw error;
+  }
+
+  const organizations = await getAllOrganizations();
+
+  const title = "Edit project";
+  res.render("edit-project", { title, projectDetails, organizations });
+};
+
+const processEditProjectForm = async (req, res) => {
+  const projectId = req.params.id;
+  const { title, description, location, date, organizationId } = req.body;
+
+  const results = validationResult(req);
+  if (!results.isEmpty()) {
+    // Validation failed - loop through errors
+    results.array().forEach((error) => {
+      req.flash("error", error.msg);
+    });
+
+    // Redirect back to the edit project form
+    return res.redirect("/edit-project/" + req.params.id);
+  }
+
+  await updateProject(
+    projectId,
+    title,
+    description,
+    location,
+    date,
+    organizationId
+  );
+  req.flash("success", "Project updated successfully!");
+
+  res.redirect(`/project/${projectId}`);
+};
+
+
 export {
   showProjectsPage,
   showProjectDetailsPage,
   showNewProjectForm,
   processNewProjectForm,
   projectValidation,
+  showEditProjectForm,
+  processEditProjectForm,
 };
