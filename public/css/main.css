@@ -160,6 +160,11 @@ main>ul>li img {
     flex-shrink: 0;
 }
 
+.anchor{
+    font-size: 1rem;
+    color: var(--color-nav-bg);
+}
+
 /* Partner Title Styling */
 main>ul>li strong {
     color: var(--color-nav-bg);
