@@ -22,6 +22,10 @@
                 </li>
                 <% }); %>
         </ul>
-        <p><a class="anchor" href="/new-project">Add a Service Project</a></p>
+
+        <% if (user && user.role_name==='admin' ) { %>
+            <p><a class="anchor" href="/new-project">Add a Service Project</a></p>
+            <% } %>
+
     </main>
     <%- include('partials/footer') %>

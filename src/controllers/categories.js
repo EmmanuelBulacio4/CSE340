@@ -114,7 +114,16 @@ const showEditCategoryForm = async (req, res) => {
 
 const processEditCategoryForm = async (req, res) => {
   const categoryId = req.params.id;
-  const name = req.body.name;
+  const { name } = req.body;
+
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    errors.array().forEach((error) => {
+      req.flash("error", error.msg);
+    });
+
+    return res.redirect(`/edit-category/${categoryId}`);
+  }
 
   await updateCategory(categoryId, name);
 
